@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ .Title }}</title>
+        <link
+            rel="stylesheet"
+            href="//unpkg.com/@highlightjs/cdn-assets@11.2.0/styles/default.min.css"
+        />
+        <script src="//unpkg.com/@highlightjs/cdn-assets@11.2.0/highlight.min.js"></script>
+        <script>
+            hljs.highlightAll();
+        </script>
+    </head>
+    <body>
+		<span style="font-size: 15px;">{{ .FileName }}</span></br>
+        <pre><code class="language-{{ .CodeType }}">{{ .CodeContent }}</code></pre>
+		<button><a style="font-size: 12px; text-decoration:none" href="/download/{{ .FilePath }}">Download</a></button>
+    </body>
+</html>

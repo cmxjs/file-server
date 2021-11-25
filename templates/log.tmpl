@@ -1,0 +1,134 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Read Result</title>
+	<style type="text/css">
+		table th {
+			text-align: left;
+			height: 30px;
+			background: #deeeee;
+			padding: 5px;
+			margin: 0;
+			border: 0px;
+		}
+
+		table td {
+			text-align: left;
+			height: 30px;
+			margin: 0;
+			padding: 5px;
+			border: 0px
+		}
+
+		table tr:hover {
+			background: #eeeeee;
+		}
+
+		a {
+			/*color: hotpink;*/
+			color: blue;
+			text-decoration: none;
+		}
+
+		.span6 {
+			/*width:500px;*/
+			float: inherit;
+			margin: 10px;
+		}
+
+		#pagiDiv span {
+			background: #1e90ff;
+			border-radius: .2em;
+			padding: 5px;
+		}
+
+		.line {
+			color: darkgray;
+			width: {{ .Line_width }};
+			px;
+			display:inline-block;
+			text-align:right;
+		}
+
+		.colorGreen {
+			color: green;
+			font-weight: 700;
+		}
+
+		.colorRed {
+			color: red;
+			font-weight: 700;
+		}
+
+		.colorOrange {
+			color: orange;
+			font-weight: 700;
+		}
+
+		.colorYellow {
+			color: yellow;
+			font-weight: 700;
+		}
+
+		.colorBlue {
+			color: blue;
+			font-weight: 700;
+		}
+
+		.colorIndigo {
+			color: indigo;
+			font-weight: 700;
+		}
+
+		.colorBlack {
+			color: black;
+		}
+
+		.STYLE1 {
+			font-size: 16px;
+			text-align: center;
+			display: block;
+		}
+
+		.STYLE2 {
+			font-size: 16px;
+			text-align: right;
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<h1 align="center">Automation Test Log</h1>
+
+	<table align="center" width="100%" bgcolor="#CCCCCC" style="table-layout: fixed;">
+		<tr>
+			<td width="20%" style="word-wrap: break-word;">
+				{{ range $i, $v := .Log_content }}
+					{{- if eq $v.Color "StartCase" -}}
+						</details></br>
+						<details id="details" close>
+						<summary style="color:darkslateblue; font-weight: 1000;font-size:x-large" >{{ $v.Info }} (click to expand/hide)</summary>
+					{{- else if eq $v.Color "EndCase" -}}
+						</details></br>
+					{{- else if ne $v.Info "" -}}
+						{{- if eq $v.Color "colorBlack" -}}
+						<span class="line">{{ add $i 1 }}</span> {{ $v.Info }}</br>
+						{{- else -}}
+						<span class="line">{{ add $i 1 }}</span> <span class="{{ $v.Color }}">{{ $v.Info }}</span></br>
+						{{- end -}}
+					{{- else -}}
+						<span class="line">{{ add $i 1 }}</span></br>
+					{{- end -}}
+				{{ else }}
+					EMPTY
+				{{ end }}
+
+				<span class="colorBlack"><button><a href="/download/{{ .Log_file }}">Download log</a></button></span></br>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>
